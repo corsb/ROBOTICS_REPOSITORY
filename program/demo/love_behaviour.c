@@ -6,7 +6,7 @@
  #include <motor_led/advance_one_timer/e_motors.h>
  #include <motor_led/advance_one_timer/e_agenda.h>
  
-
+long b=0;
  
  void love_behaviour()
  {
@@ -18,6 +18,7 @@
 	int proxy5;
 	int proxy6;
 	int proxy7;
+	int i;
 
 	e_init_motors();
  	e_init_port();
@@ -27,7 +28,28 @@
 	e_init_ad_scan(ALL_ADC);
  	while(1)
  	{
- 		long i;
+ 		
+ 		event = 0;
+ 		while (event==0)
+ 		{
+ 			LED0 = 1^b;
+			LED1 = 0^b;
+			LED2 = 1^b;
+			LED3 = 0^b;
+			LED4 = 1^b;
+			LED5 = 0^b;
+			LED6 = 1^b;
+			LED7 = 0^b;
+	
+			event = check_for_event2();
+			
+			if(b==0){
+				b=1;
+			}
+			else{
+				b=0;	
+			}
+ 		}
  		proxy0 = e_get_prox(0);
 		proxy1 = e_get_prox(1);
  		proxy2 = e_get_prox(2);
@@ -37,8 +59,9 @@
  		proxy6 = e_get_prox(6);
 		proxy7 = e_get_prox(7);
 
- 		if(proxy0 > 1000){
+ 		if(proxy0 > 100){
  			e_set_speed_left(500);
+ 			e_set_speed_right(500);
 			LED0 = 1;
 			LED1 = 0;
 			LED2 = 0;
@@ -48,8 +71,9 @@
 			LED6 = 0;
 			LED7 = 0;
 			}
-		else if(proxy1 > 1000){
+		else if(proxy1 > 100){
  			e_set_speed_left(500);
+ 			e_set_speed_right(300);
  			LED0 = 0;
 			LED1 = 1;
 			LED2 = 0;
@@ -59,7 +83,7 @@
 			LED6 = 0;
 			LED7 = 0;
 		}
-		else if(proxy2 > 50){
+		else if(proxy2 > 100){
  			e_set_speed_left(500);
  			LED0 = 0;
 			LED1 = 0;
@@ -70,8 +94,9 @@
 			LED6 = 0;
 			LED7 = 0;
 		}
-		else if(proxy3 > 1000){
- 			e_set_speed_left(500);
+		else if(proxy3 > 100){
+ 			e_set_speed_left(-500);
+ 			e_set_speed_right(-300);
  			LED0 = 0;
 			LED1 = 0;
 			LED2 = 0;
@@ -81,8 +106,9 @@
 			LED6 = 0;
 			LED7 = 0;
 		}
-		else if(proxy4 > 1000){
-			e_set_speed_right(500);
+		else if(proxy4 > 100){
+			e_set_speed_right(-500);
+			e_set_speed_left(-500);
  			LED0 = 0;
 			LED1 = 0;
 			LED2 = 0;
@@ -92,8 +118,9 @@
 			LED6 = 0;
 			LED7 = 0;
 		}
-		else if(proxy5 > 1000){
-			e_set_speed_right(500);
+		else if(proxy5 > 100){
+			e_set_speed_right(-500);
+			e_set_speed_left(-300);
  			LED0 = 0;
 			LED1 = 0;
 			LED2 = 0;
@@ -103,7 +130,7 @@
 			LED6 = 0;
 			LED7 = 0;
 		}
-		else if(proxy6 > 1000){
+		else if(proxy6 > 100){
 			e_set_speed_right(500);
  			LED0 = 0;
 			LED1 = 0;
@@ -114,8 +141,9 @@
 			LED6 = 1;
 			LED7 = 0;
 		}
-		else if(proxy7 > 1000){
+		else if(proxy7 > 100){
 			e_set_speed_right(500);
+			e_set_speed_left(300);
  			LED0 = 0;
 			LED1 = 0;
 			LED2 = 0;
