@@ -153,6 +153,19 @@ long b=0;
 			LED6 = 0;
 			LED7 = 1;
 		}			
+ 		else if(proxy0 > 1000){
+ 			LED0 = 1;
+			LED1 = 1;
+			LED2 = 1;
+			LED3 = 1;
+			LED4 = 1;
+			LED5 = 1;
+			LED6 = 1;
+			LED7 = 1;
+			}
+ 		
+
+ 		
  		else {
 			e_set_speed_left(0);
 			e_set_speed_right(0);
